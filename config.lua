@@ -50,6 +50,8 @@ vim.opt.tabstop = 4
 vim.o.cursorline = false
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "WinBar", { bg = "none" })
+vim.api.nvim_set_hl(0, "WinBarNC", { bg = "none" })
 
 lvim.reload_config_on_save = true
 lvim.transparent_window = true
@@ -145,7 +147,7 @@ lvim.plugins = {
                         information = { "undercurl" },
                     },
                 },
-                navic = { enabled = true, custom_bg = "lualine" },
+                navic = { enabled = true, custom_bg = "none" },
                 neotest = true,
                 neotree = true,
                 noice = true,
