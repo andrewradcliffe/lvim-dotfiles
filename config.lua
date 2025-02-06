@@ -41,18 +41,19 @@ lvim.builtin.which_key.mappings["sT"] = {
 end,
 "Find Text Everywhere",
 }
-
 lvim.builtin.which_key.mappings["l"]["R"] = { "<cmd>LspRestart<cr>", "Restart LSP" }
-
 lvim.builtin.which_key.mappings["gB"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Line Blame (inline)"}
-
+lvim.keys.normal_mode["<C-t>"] = "<cmd>ToggleTerm direction=float<cr>"
+lvim.keys.term_mode["<C-t>"] = "<cmd>ToggleTerm direction=float<cr>"
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
+vim.o.cursorline = false
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 
 lvim.reload_config_on_save = true
-
--- lvim.transparent_window = true
-lvim.transparent_window = false
+lvim.transparent_window = true
+-- lvim.transparent_window = false
 lvim.colorscheme = "catppuccin"
 
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
@@ -110,7 +111,52 @@ lvim.plugins = {
             })
         end
     },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    -- { "catppuccin/nvim", name = "catppuccin", priority = 1000,
+    --   opts = {
+    --         transparent_background = true,
+    --     }},
+    { -- was missing this
+        "catppuccin/nvim",
+        lazy = false,
+        name = "catppuccin",
+        opts = {
+            transparent_background = true,
+            integrations = {
+                aerial = true,
+                alpha = true,
+                cmp = true,
+                dashboard = true,
+                flash = true,
+                gitsigns = true,
+                headlines = true,
+                illuminate = true,
+                indent_blankline = { enabled = true },
+                leap = true,
+                lsp_trouble = true,
+                mason = true,
+                markdown = true,
+                mini = true,
+                native_lsp = {
+                    enabled = true,
+                    underlines = {
+                        errors = { "undercurl" },
+                        hints = { "undercurl" },
+                        warnings = { "undercurl" },
+                        information = { "undercurl" },
+                    },
+                },
+                navic = { enabled = true, custom_bg = "lualine" },
+                neotest = true,
+                neotree = true,
+                noice = true,
+                semantic_tokens = true,
+                telescope = true,
+                treesitter = true,
+                treesitter_context = true,
+                which_key = true,
+            },
+        },
+    }, -- and this
     {
         "nvim-neotest/neotest",
         dependencies = {
