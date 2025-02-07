@@ -37,14 +37,15 @@ lvim.builtin.which_key.mappings["sT"] = {
     function()
         require("telescope.builtin").live_grep {
         additional_args = function(args) return vim.list_extend(args, { "--hidden", "--no-ignore" }) end,
-}
-end,
-"Find Text Everywhere",
+    }
+    end,
+    "Find Text Everywhere",
 }
 lvim.builtin.which_key.mappings["l"]["R"] = { "<cmd>LspRestart<cr>", "Restart LSP" }
 lvim.builtin.which_key.mappings["gB"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Line Blame (inline)"}
 lvim.keys.normal_mode["<C-t>"] = "<cmd>ToggleTerm direction=float<cr>"
 lvim.keys.term_mode["<C-t>"] = "<cmd>ToggleTerm direction=float<cr>"
+
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.o.cursorline = false
@@ -113,11 +114,7 @@ lvim.plugins = {
             })
         end
     },
-    -- { "catppuccin/nvim", name = "catppuccin", priority = 1000,
-    --   opts = {
-    --         transparent_background = true,
-    --     }},
-    { -- was missing this
+    {
         "catppuccin/nvim",
         lazy = false,
         name = "catppuccin",
@@ -158,7 +155,7 @@ lvim.plugins = {
                 which_key = true,
             },
         },
-    }, -- and this
+    },
     {
         "nvim-neotest/neotest",
         dependencies = {
@@ -186,45 +183,3 @@ local on_tab = vim.schedule_wrap(function(fallback)
     end
 end)
 lvim.builtin.cmp.mapping["<Tab>"] = on_tab
-
--- Debug config
-
-local dap = require("dap")
-
-dap.adapters.coreclr = {
-    type = "executable",
-    command = "C:\\Users\\Andrew Radcliffe\\scoop\\shims\\netcoredbg.exe",
-    args = { "--interpreter=vscode" },
-}
-
--- dap.configurations.cs = {
---     {
---         type = "coreclr",
---         name = "launch - netcoredbg",
---         request = "launch",
---         program = function()
---             return vim.fn.input("Path to dll > ", vim.fn.getcwd() .. "\\bin\\Debug\\net8.0\\")
---         end,
---     }
--- }
-
--- dap.configurations.cs = {
---     {
---         type = "coreclr",
---         name = "Attach to Azure Functions",
---         request = "attach",
---         processId = function()
---             -- Run PowerShell to fetch the Azure Functions runtime PID
---             local handle = io.popen([[powershell -Command "Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'func.dll' } | Select-Object -ExpandProperty ProcessId"]])
---             local result = handle:read("*a")
---             handle:close()
---             -- Trim any trailing whitespace and return as a number
---             return tonumber(result:match("%S+"))
---         end,
---         program = nil,
---         cwd = vim.fn.getcwd(),
---         stopAtEntry = false,
---         console = "internalConsole",
---     }
--- }
---
