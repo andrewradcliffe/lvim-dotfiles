@@ -32,6 +32,11 @@ vim.api.nvim_set_keymap('n', '<F1>', '<Nop>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<F1>', '<Nop>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<F1>', '<Nop>', { noremap = true, silent = true })
 
+-- vim.keymap.set("n", "<leader>fw", function()
+--   require("telescope.builtin").live_grep({ default_text = vim.fn.expand("<cword>") })
+-- end, { noremap = true, silent = true, desc = "Live Grep Word Under Cursor" })
+
+lvim.builtin.which_key.mappings["fw"] = { "<cmd>lua require('telescope.builtin').live_grep({ default_text = vim.fn.expand('<cword>') })<cr>", "Live Grep Word Under Cursor" }
 lvim.builtin.which_key.mappings["sF"] = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "Find File Everywhere" }
 lvim.builtin.which_key.mappings["sT"] = {
     function()
@@ -41,8 +46,12 @@ lvim.builtin.which_key.mappings["sT"] = {
     end,
     "Find Text Everywhere",
 }
+lvim.keys.normal_mode["gf"] = {
+}
 lvim.builtin.which_key.mappings["l"]["R"] = { "<cmd>LspRestart<cr>", "Restart LSP" }
 lvim.builtin.which_key.mappings["gB"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Line Blame (inline)"}
+-- lvim.builtin.which_key.mappings["f"]["o"] = { "<cmd>PeekOpen<cr>", "Open Markdown File" }
+-- lvim.builtin.which_key.mappings["f"]["c"] = { "<cmd>PeekClose<cr>", "Close Markdown File"}
 lvim.keys.normal_mode["<C-t>"] = "<cmd>ToggleTerm direction=float<cr>"
 lvim.keys.term_mode["<C-t>"] = "<cmd>ToggleTerm direction=float<cr>"
 
@@ -53,6 +62,14 @@ vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 vim.api.nvim_set_hl(0, "WinBar", { bg = "none" })
 vim.api.nvim_set_hl(0, "WinBarNC", { bg = "none" })
+
+-- set conceallevel only for markdown files
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.opt.conceallevel = 1
+    end,
+})
 
 lvim.reload_config_on_save = true
 lvim.transparent_window = true
@@ -163,6 +180,52 @@ lvim.plugins = {
             "nvim-lua/plenary.nvim",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
+        }
+    },
+    -- obsidian.md & markdown
+    {
+        "epwalsh/obsidian.nvim",
+        version = "*",
+        lazy = true,
+        ft = "markdown",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        opts = {
+            workspaces = {
+                {
+                    name = "Work",
+                    path = "C:/Work Notes"
+                }
+            },
+            daily_notes = {
+                path = "C:/Work Notes/Daily Notes",
+                date_format = "%Y-%m-%d",
+                template = "C:/Work Notes/Daily Note Template.md"
+            },
+            completion = {
+                nvim_cmp = true
+            },
+            mappings = {
+                ["gf"] = {
+                    action = function()
+                        return require("obsidian").util.gf_passthrough()
+                    end,
+                    opts = { noremap = true, expr = true, buffer = true },
+                },
+                ["<leader>ch"] = {
+                    action = function()
+                        return require("obsidian").util.toggle_checkbox()
+                    end,
+                    opts = { buffer = true }
+                },
+                -- ["<cr>"] = {
+                --     action = function()
+                --         return require("obsidian").util.smart_action()
+                --     end,
+                --     opts = { buffer = true, expr = true }
+                -- },
+            }
         }
     },
 }
