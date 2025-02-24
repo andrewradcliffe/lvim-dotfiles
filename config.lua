@@ -58,10 +58,13 @@ lvim.keys.term_mode["<C-t>"] = "<cmd>ToggleTerm direction=float<cr>"
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.o.cursorline = false
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-vim.api.nvim_set_hl(0, "WinBar", { bg = "none" })
-vim.api.nvim_set_hl(0, "WinBarNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE", ctermbg = "NONE" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", ctermbg = "NONE" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE", ctermbg = "NONE" })
+vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE", ctermbg = "NONE" })
+vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "NONE", ctermbg = "NONE" })
+vim.api.nvim_set_hl(0, "WinBarNC", { bg = "none", ctermbg = "NONE" })
 
 -- set conceallevel only for markdown files
 vim.api.nvim_create_autocmd("FileType", {
@@ -69,6 +72,15 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.opt.conceallevel = 1
     end,
+})
+
+-- clear recent command after 5 seconds
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+    callback = function()
+        vim.fn.timer_start(5000, function()
+            vim.cmd [[ echon ' ']]
+        end)
+    end
 })
 
 lvim.reload_config_on_save = true
@@ -228,6 +240,12 @@ lvim.plugins = {
             }
         }
     },
+    -- {
+    --     "nvzone/typr",
+    --     dependencies = "nvzone/volt",
+    --     opts = {},
+    --     cmd = { "Typr", "TyprStats"}
+    -- }
 }
 
 -- Below config is required to prevent copilot overriding Tab with a suggestion
