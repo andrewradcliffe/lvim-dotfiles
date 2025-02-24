@@ -46,8 +46,6 @@ lvim.builtin.which_key.mappings["sT"] = {
     end,
     "Find Text Everywhere",
 }
-lvim.keys.normal_mode["gf"] = {
-}
 lvim.builtin.which_key.mappings["l"]["R"] = { "<cmd>LspRestart<cr>", "Restart LSP" }
 lvim.builtin.which_key.mappings["gB"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Line Blame (inline)"}
 -- lvim.builtin.which_key.mappings["f"]["o"] = { "<cmd>PeekOpen<cr>", "Open Markdown File" }
