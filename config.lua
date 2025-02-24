@@ -78,7 +78,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("CmdlineLeave", {
     callback = function()
         vim.fn.timer_start(5000, function()
-            vim.cmd [[ echon ' ']]
+            vim.cmd [[ echon ' ' ]]
         end)
     end
 })
