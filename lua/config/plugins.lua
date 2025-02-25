@@ -124,12 +124,18 @@ return {
                 --     opts = { buffer = true, expr = true }
                 -- },
             }
-        }
+        },
     },
-    -- {
-    --     "nvzone/typr",
-    --     dependencies = "nvzone/volt",
-    --     opts = {},
-    --     cmd = { "Typr", "TyprStats"}
-    -- }
+    -- Plugin doesn't support transparent background
+    {
+        "nvzone/typr",
+        enabled = false,
+        dependencies = "nvzone/volt",
+        opts = {},
+        cmd = { "Typr", "TyprStats"}
+    },
+    {
+        "vim-scripts/BufOnly.vim",
+        cmd = "BufOnly",
+    }
 }
