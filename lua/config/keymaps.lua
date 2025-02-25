@@ -22,7 +22,7 @@ lvim.builtin.which_key.mappings["lR"] = { "<cmd>LspRestart<cr>", "Restart LSP" }
 lvim.builtin.which_key.mappings["gB"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Line Blame (inline)"}
 
 -- Close all buffers but the current one
-lvim.builtin.which_key.mappings["bC"] = { "<cmd>BufOnly<cr>", "Close all other buffers" }
+lvim.builtin.which_key.mappings["bC"] = { "<cmd>BufferLineCloseRight<cr><cmd>BufferLineCloseLeft<cr>", "Close all other buffers" }
 
 -- Toggle floating terminal
 lvim.keys.normal_mode["<C-t>"] = "<cmd>ToggleTerm direction=float<cr>"

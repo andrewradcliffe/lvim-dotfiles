@@ -134,8 +134,4 @@ return {
         opts = {},
         cmd = { "Typr", "TyprStats"}
     },
-    {
-        "vim-scripts/BufOnly.vim",
-        cmd = "BufOnly",
-    }
 }
