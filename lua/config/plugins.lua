@@ -93,13 +93,16 @@ return {
             workspaces = {
                 {
                     name = "Work",
-                    path = "C:/Work Notes"
+                    path = "C:\\Work Notes"
                 }
             },
+            templates = {
+                subdir = "templates"
+            },
             daily_notes = {
-                path = "C:/Work Notes/Daily Notes",
+                folder = "Daily Notes",
                 date_format = "%Y-%m-%d",
-                template = "C:/Work Notes/Daily Note Template.md"
+                template = "Daily Note Template.md"
             },
             completion = {
                 nvim_cmp = true
@@ -133,5 +136,17 @@ return {
         dependencies = "nvzone/volt",
         opts = {},
         cmd = { "Typr", "TyprStats"}
+    },
+    -- Fix python indenting
+    {
+        "Vimjas/vim-python-pep8-indent",
+        ft = "python"
+    },
+    {
+        "echasnovski/mini.ai",
+        version = "*",
+        config = function()
+            require("mini.ai").setup()
+        end
     },
 }

@@ -2,7 +2,7 @@
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",
     callback = function()
-        vim.opt.conceallevel = 1
+        vim.opt.conceallevel = 2
     end,
 })
 
@@ -13,11 +13,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- clear recent command after 5 seconds
-vim.api.nvim_create_autocmd("CmdlineLeave", {
-    callback = function()
-        vim.fn.timer_start(5000, function()
-            vim.cmd [[ echon ' ' ]]
-        end)
-    end
-})
+-- vim.api.nvim_create_autocmd("CmdlineLeave", {
+--     callback = function()
+--         vim.fn.timer_start(5000, function()
+--             vim.cmd [[ echon ' ' ]]
+--         end)
+--     end
+-- })
 

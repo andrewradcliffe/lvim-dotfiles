@@ -25,6 +25,8 @@ vim.g.clipboard = {
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.o.cursorline = false
+vim.opt.guicursor = "n-v-c:block,i-ci:blinkon0"
+vim.opt.cinoptions = "{1s"
 
 -- Transparent background
 vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
