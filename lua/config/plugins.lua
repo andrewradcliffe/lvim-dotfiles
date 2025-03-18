@@ -80,7 +80,6 @@ return {
             "nvim-treesitter/nvim-treesitter",
         }
     },
-    -- obsidian.md & markdown
     {
         "epwalsh/obsidian.nvim",
         version = "*",
@@ -114,12 +113,6 @@ return {
                     end,
                     opts = { noremap = true, expr = true, buffer = true },
                 },
-                ["<leader>ch"] = {
-                    action = function()
-                        return require("obsidian").util.toggle_checkbox()
-                    end,
-                    opts = { buffer = true }
-                },
                 -- ["<cr>"] = {
                 --     action = function()
                 --         return require("obsidian").util.smart_action()
@@ -128,6 +121,15 @@ return {
                 -- },
             }
         },
+    },
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
     },
     -- Plugin doesn't support transparent background
     {

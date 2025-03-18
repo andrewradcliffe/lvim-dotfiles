@@ -27,3 +27,35 @@ lvim.builtin.which_key.mappings["bC"] = { "<cmd>BufferLineCloseRight<cr><cmd>Buf
 -- Toggle floating terminal
 lvim.keys.normal_mode["<C-t>"] = "<cmd>ToggleTerm direction=float<cr>"
 lvim.keys.term_mode["<C-t>"] = "<cmd>ToggleTerm direction=float<cr>"
+
+-- Obsidian Keybindings
+lvim.builtin.which_key.mappings["o"] = {
+    name = "+Obsidian",
+    t = { "<cmd>ObsidianToday<cr>" , "Open today's daily note" },
+    y = { "<cmd>ObsidianYesterday<cr>" , "Open yesterday's daily note" },
+    d = {
+        function()
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":ObsidianToday ", true, false, true), "n", false)
+        end,
+        "Open daily note with input"
+    },
+    c = {
+        function()
+            return require("obsidian").util.toggle_checkbox()
+        end,
+        "Toggle checkbox"
+    }
+}
+
+-- Markdown Preview
+lvim.builtin.which_key.mappings["m"] = {
+    name = "+Markdown",
+    p = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle Markdown Preview" },
+    P = { "<cmd>MarkdownPreview<cr>", "Open Markdown Preview" },
+    S = { "<cmd>MarkdownPreviewStop<cr>", "Stop Markdown Preview" },
+}
+
+lvim.builtin.which_key.mappings["p"] = {
+    name = "+Python",
+    m = { '"mPGdd6gg$', "Migration Script Boilerplate" }
+}
