@@ -69,6 +69,13 @@ return {
                 treesitter_context = true,
                 which_key = true,
             },
+            custom_highlights = function(colors)
+                return {
+                    LineNrAbove = { fg='#6c7086', bold=true },
+                    LineNr = { fg='#cdd6f4', bold = true },
+                    LineNrBelow = { fg='#6c7086', bold=true },
+                }
+            end,
         },
     },
     {
@@ -131,10 +138,9 @@ return {
         end,
         ft = { "markdown" },
     },
-    -- Plugin doesn't support transparent background
     {
         "nvzone/typr",
-        enabled = false,
+        enabled = false, -- Plugin doesn't support transparent background
         dependencies = "nvzone/volt",
         opts = {},
         cmd = { "Typr", "TyprStats"}
